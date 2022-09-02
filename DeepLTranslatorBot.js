@@ -135,6 +135,7 @@ function fix_text(sourceText){
     txt = txt.replace("{", "｛");
     txt = txt.replace("}", "｝");
     txt = txt.replace("^", "＾");
+    txt = txt.replace("`", "｀");
     txt = txt.replace(" ", "");
     txt = txt.replace("　", "");
 
