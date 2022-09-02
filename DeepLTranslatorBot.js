@@ -211,7 +211,7 @@ function isNotReplyed(tweetId) {
 
 function main (){
     try{
-        var data = getUserTweet(SAKU_ID);
+        var data = getUserTweet(TARGET_ID);
     }catch(e){
         console.error(`【ERROR】 ${e.message}`);
         return;
@@ -219,7 +219,7 @@ function main (){
     console.log(`【RAW TEXT】 ${data.text}`);
 
     try{
-        postTweet(data, USER_SAKU);
+        postTweet(data, USER_TARGET);
     }catch(e){
         console.error(`【ERROR】 ${e.message}`);
         return;
