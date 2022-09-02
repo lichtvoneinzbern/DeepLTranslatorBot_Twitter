@@ -37,8 +37,6 @@ function postTweet(data, mentionUser) {
      */
 
     // Check for duplecates
-    // Logger.log(data);
-
     if(isNotReplyed(data.id) == false){
         Logger.log("replyed.");
 
@@ -77,7 +75,7 @@ function postTweet(data, mentionUser) {
         }
     });
 
-    // Logger.log(response);
+    Logger.log("succeed.")
 
     return;
 }
@@ -103,7 +101,6 @@ function transDeepL(text) {
     // Multi line support
     for(i=0; i<texts.length; i++){
         let txt = fix_text(texts[i]);
-        Logger.log(txt);
 
         // Create request URL
         let url = `${DEEPL_API_URL}${DEEPL_API_KEY}&text=${fixedText}&source_lang=${sourceLang}&target_lang=${targetLang}`;
@@ -112,9 +109,6 @@ function transDeepL(text) {
         let response =  JSON.parse(UrlFetchApp.fetch(url).getContentText());
         result[result.length] = response.translations[0].text + "\n";
     }
-
-    // Logger.log(result);
-    // Logger.log(result.length);
 
     return result;
 }
