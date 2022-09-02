@@ -135,6 +135,7 @@ function fix_text(sourceText){
     txt = txt.replace("{", "｛");
     txt = txt.replace("}", "｝");
     txt = txt.replace("^", "＾");
+    txt = txt.replace("`", "｀");
     txt = txt.replace(" ", "");
     txt = txt.replace("　", "");
 
@@ -209,11 +210,73 @@ function isNotReplyed(tweetId) {
 }
 
 function main (){
-    var data = getUserTweet(TARGET_ID);
-    postTweet(data, USER_TARGET);
+    try{
+        var data = getUserTweet(SAKU_ID);
+    }catch(e){
+        console.error(`【ERROR】 ${e.message}`);
+        return;
+    }
+    console.log(`【RAW TEXT】 ${data.text}`);
+
+    try{
+        postTweet(data, USER_SAKU);
+    }catch(e){
+        console.error(`【ERROR】 ${e.message}`);
+        return;
+    }
 }
 
 // ----------------------------------------------------------------
+
+// ----------
+// for Debug
+// ----------
+
+function debug() {
+    var tweetId = ""; // target debug tweet
+
+    try{
+        var data = getTweetFromTweetId(tweetId);
+    }catch(e){
+        console.error(`【ERROR】 ${e.message}`);
+        return;
+    }
+    console.log(`【RAW TEXT】 ${data.text}`);
+
+    try{
+        var translated = transDeepL(data.text);
+    }catch(e){
+        console.error(`【ERROR】 ${e.message}`);
+        return;
+    }
+    console.log(`【TRANSLATED TEXT】 ${translated}`);
+
+    // postTweet(data, USER_SAKU);
+}
+
+function getTweetFromTweetId(tweetId){
+    /**
+    * Get tweet json data, from tweet id
+    *
+    * args :
+    *   tweetId : target tweet id
+    * return :
+    *   response.data : json (tweet id and text);
+    */
+
+    var url = `https://api.twitter.com/2/tweets/${tweetId}`;
+    var options = {
+        "method": "get",
+        "headers": {
+        "authorization": `Bearer ${BAERER_ID}`
+        },
+    };
+
+    var response = JSON.parse(UrlFetchApp.fetch(url, options));
+    console.log(response);
+
+    return response.data;
+}
 
 // ----------
 // Not used
