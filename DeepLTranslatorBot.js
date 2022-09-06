@@ -37,7 +37,7 @@ function postTweet(data, mentionUser) {
      */
 
     // Check for duplecates
-    if(isNotReplyed(data.id) == false){
+    if(checkReplyId(data.id) == false){
         Logger.log("replyed.");
 
         return;
@@ -174,6 +174,25 @@ function getUserTweet(userId) {
         }else{
             return response.data[i];
         }
+    }
+}
+
+function checkReplyId(TweetId){
+    /**
+     * Check whether the bot sent the reply to the tweet.
+     *
+     * args :
+     *  tweetId : Tweet's unique ID(response.data[x].id)
+     */
+    var sheetId = SHEET_ID;
+    var ss = SpreadsheetApp.openById(sheetId);
+    var sheet = ss.getActiveSheet();
+
+    if (sheet.getRange("A1").getValue() == TweetId){
+        return false;
+    }else{
+        sheet.getRange("A1").setValue(TweetId);
+        return true;
     }
 }
 
