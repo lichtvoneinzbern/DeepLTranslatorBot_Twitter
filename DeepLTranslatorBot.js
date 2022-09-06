@@ -126,18 +126,19 @@ function fix_text(sourceText){
 
     var txt = sourceText;
 
-    txt = txt.replace("\"", "\'");
-    txt = txt.replace("#", "");
-    txt = txt.replace("|", "｜");
-    txt = txt.replace("%", "％");
-    txt = txt.replace("\\", "/");
-    txt = txt.replace("+", "＋");
-    txt = txt.replace("{", "｛");
-    txt = txt.replace("}", "｝");
-    txt = txt.replace("^", "＾");
-    txt = txt.replace("`", "｀");
-    txt = txt.replace(" ", "");
-    txt = txt.replace("　", "");
+    txt = txt.replaceAll("\"", "\'");
+    txt = txt.replaceAll("#", "");
+    txt = txt.replaceAll("|", "｜");
+    txt = txt.replaceAll("%", "％");
+    txt = txt.replaceAll("\\", "/");
+    txt = txt.replaceAll("+", "＋");
+    txt = txt.replaceAll("{", "｛");
+    txt = txt.replaceAll("}", "｝");
+    txt = txt.replaceAll("^", "＾");
+    txt = txt.replaceAll("`", "｀");
+    txt = txt.replaceAll(" ", "");
+    txt = txt.replaceAll("　", "");
+    txt = txt.replace(/https?:\/\/t.co\/[\w!?\/+\-_~;.,*&@#$%()'[\]]+/, "");
 
     return txt;
 }
